@@ -60,10 +60,15 @@ export class CreateEmployeeComponent implements OnInit {
     if (this.createForm.invalid) {
       return;
     }
-    this.employeeService.insertEmployee(this.employee).subscribe((res) => {
-      this.Router.navigateByUrl('/');
-    });
-    console.log(this.employee);
+    let text = "Xác thực thêm mới ";
+    if(confirm(text) == true){
+      this.employeeService.insertEmployee(this.employee).subscribe((res) => {
+        alert ('Thêm mới thành công');
+        this.Router.navigateByUrl('/list-employee');
+      });
+    }else {
+      alert ('delete thất bại');
+    }
   }
   onReset() {
     this.submitted = false;

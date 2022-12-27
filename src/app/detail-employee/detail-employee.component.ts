@@ -60,10 +60,16 @@ export class DetailEmployeeComponent {
     if(this.updateForm.invalid){
       return
     }
-    this.employeeService.updateEmployee(this.employee, this.employee.id_employee).subscribe(data => {
-      alert('update thanh cong');
-      this.Router.navigateByUrl('/');
-    })
+    let text = "Xác thực update ";
+    if(confirm(text) == true){
+      this.employeeService.updateEmployee(this.employee, this.employee.id_employee).subscribe(data => {
+        alert('update thành công');
+        this.Router.navigateByUrl('/list-employee');
+      })
+    }else {
+      alert ('update thất bại');
+    }
+
 
   }
 
@@ -78,10 +84,15 @@ export class DetailEmployeeComponent {
   }
 
   deleteEmployee(id: number) {
-    this.employeeService.deleteEmployee(id).subscribe((data) => {
-      alert('xoa thanh cong');
-      this.Router.navigateByUrl('/');
-    });
+    let text = "Xác thực delete ";
+    if(confirm(text) == true){
+      this.employeeService.deleteEmployee(id).subscribe((data) => {
+        alert('xoa thanh cong');
+        this.Router.navigateByUrl('/list-employee');
+      });
+    }else {
+      alert ('delete thất bại');
+    }
   }
 
   onMouseEnter(hoverName: HTMLElement) {
