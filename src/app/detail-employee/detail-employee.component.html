@@ -1,0 +1,513 @@
+<div class="content">
+  <div class="title-tt">
+    <u>Thông tin liên hệ</u>
+  </div>
+  <form [formGroup]="updateForm">
+    <div class="row">
+      <div class="form-group col-md-3" id="file-main" style="z-index: 1">
+        <div
+          class="profile-pic-div"
+          (mouseenter)="onMouseEnter(hoverName)"
+          (mouseleave)="onMouseOut(hoverName)"
+        >
+          <img
+            src="assets/img/image-avatar/{{ employee.avatar }}"
+            alt=""
+            id="photo"
+            #upload
+          />
+          <input
+            type="file"
+            id="file"
+            name="image"
+            class="form-control-file"
+            (change)="modelChanged($event, upload)"
+            [(ngModel)]="employee.avatar"
+          />
+          <label for="file" id="uploadBtn" #hoverName>Chosee photo...</label>
+        </div>
+        <label for="file" style="margin-left: 55px; margin-top: 10px"
+          >Ảnh đại diện</label
+        >
+      </div>
+      <div class="form-group col-md-3 padding">
+        <label for="manhanvien">Mã nhân viên</label>
+        <input
+          type="text"
+          name="manhanvien"
+          formControlName="manhanvien"
+          [ngClass]="{
+            'is-invalid': submitted && f['manhanvien'].errors
+          }"
+          class="form-control"
+          [(ngModel)]="employee.ma_employee"
+        />
+        <div *ngIf="submitted && f['manhanvien'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+
+      <div class="form-group col-md-3 padding">
+        <label for="fullName">Họ và tên</label>
+        <input
+          type="text"
+          name="fullName"
+          formControlName="fullName"
+          [ngClass]="{
+            'is-invalid': submitted && f['fullName'].errors
+          }"
+          class="form-control"
+          [(ngModel)]="employee.full_name"
+        />
+        <div *ngIf="submitted && f['fullName'].errors" class="text-danger">
+          <div *ngIf="f['fullName'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['fullName'].errors['pattern']">
+            Định dạng không đúng !
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3 padding">
+        <label for="">Ngày sinh</label>
+        <input
+          type="date"
+          name="ngaysinh"
+          class="form-control"
+          formControlName="ngaysinh"
+          [ngClass]="{
+            'is-invalid': submitted && f['ngaysinh'].errors
+          }"
+          [(ngModel)]="employee.date_of_birth"
+        />
+        <div *ngIf="submitted && f['ngaysinh'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+    </div>
+    <div class="row row-file">
+      <div class="col-md-3" style="z-index: 0"></div>
+      <div class="form-group col-md-3">
+        <label for="">Giới tính</label>
+        <div class="form-check">
+          <input
+            type="radio"
+            name="gender"
+            value="1"
+            checked
+            formControlName="gender"
+            [(ngModel)]="employee.gender"
+          />Nam
+          <input
+            type="radio"
+            name="gender"
+            value="2"
+            formControlName="gender"
+            [(ngModel)]="employee.gender"
+          />Nữ
+        </div>
+        <div *ngIf="submitted && f['gender'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Email</label>
+        <input
+          type="email"
+          name="email"
+          formControlName="email"
+          [ngClass]="{
+            'is-invalid': submitted && f['email'].errors
+          }"
+          [(ngModel)]="employee.email"
+          class="form-control"
+        />
+        <div *ngIf="submitted && f['email'].errors" class="text-danger">
+          <div *ngIf="f['email'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['email'].errors['email']">Định dạng không đúng !</div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Số điện thoại</label>
+        <input
+          type="text"
+          name="sdt"
+          formControlName="sdt"
+          [ngClass]="{
+            'is-invalid': submitted && f['sdt'].errors
+          }"
+          class="form-control"
+          [(ngModel)]="employee.phone"
+        />
+        <div *ngIf="submitted && f['sdt'].errors" class="text-danger">
+          <div *ngIf="f['sdt'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['sdt'].errors['pattern']">Định dạng không đúng !</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="">Dân tộc</label>
+        <input
+          type="text"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control"
+          [(ngModel)]="employee.ethnic"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Tôn giáo</label>
+        <input
+          type="text"
+          name="tongiao"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control"
+          [(ngModel)]="employee.religion"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Quốc tịch</label>
+        <select
+          id="inputState"
+          name="quoctich"
+          class="form-control form-select"
+          [(ngModel)]="employee.nationality"
+          formControlName="quoctich"
+          [ngClass]="{
+            'is-invalid': submitted && f['quoctich'].errors
+          }"
+        >
+          <option value="Viet Nam">Viet Nam</option>
+          <option value="America">America</option>
+          <option value="France">France</option>
+          <option value="China">China</option>
+          <option value="Korea">Korea</option>
+          <option value="Japan">Japan</option>
+        </select>
+        <div *ngIf="submitted && f['quoctich'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">CMND/CCCD</label>
+        <input
+          type="text"
+          name="cmnd"
+          class="form-control"
+          [(ngModel)]="employee.cmnd"
+          formControlName="cmnd"
+          [ngClass]="{
+            'is-invalid': submitted && f['cmnd'].errors
+          }"
+        />
+        <div *ngIf="submitted && f['cmnd'].errors" class="text-danger">
+          <div *ngIf="f['cmnd'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['cmnd'].errors['pattern']">Định dạng không đúng !</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="">Nơi cấp</label>
+        <input
+          type="text"
+          name="noicap"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control"
+          [(ngModel)]="employee.issued_by"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Ngày cấp</label>
+        <input
+          type="date"
+          name="ngaycap"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="employee.date_range"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Người liên hệ khẩn cấp</label>
+        <input
+          type="text"
+          name="nguoilienhe"
+          class="form-control"
+          [(ngModel)]="employee.a_relative"
+          formControlName="nguoilienhe"
+          [ngClass]="{
+            'is-invalid': submitted && f['nguoilienhe'].errors
+          }"
+        />
+        <div *ngIf="submitted && f['nguoilienhe'].errors" class="text-danger">
+          <div *ngIf="f['nguoilienhe'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['nguoilienhe'].errors['pattern']">
+            Định dạng không đúng !
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Số điện thoại người liên hệ khẩn </label>
+        <input
+          type="text"
+          name="sdtnguoilienhe"
+          class="form-control"
+          [(ngModel)]="employee.phone_a_relative"
+          formControlName="sdtnguoilienhe"
+          [ngClass]="{
+            'is-invalid': submitted && f['sdtnguoilienhe'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && f['sdtnguoilienhe'].errors"
+          class="text-danger"
+        >
+          <div *ngIf="f['sdtnguoilienhe'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['sdtnguoilienhe'].errors['pattern']">
+            Định dạng không đúng !
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="title-tt">
+      <u>Thông tin hợp đồng </u>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="">Mã hợp đồng</label>
+        <input
+          type="text"
+          name="mahopdong"
+          class="form-control"
+          [(ngModel)]="employee.contract_code"
+          formControlName="mahopdong"
+          [ngClass]="{
+            'is-invalid': submitted && f['mahopdong'].errors
+          }"
+        />
+        <div *ngIf="submitted && f['mahopdong'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Ngày kí hợp đồng</label>
+        <input
+          type="date"
+          [ngModelOptions]="{ standalone: true }"
+          name="ngaykihopdong"
+          class="form-control"
+          [(ngModel)]="employee.contract_signing_date"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Ngày hiệu lực</label>
+        <input
+          type="date"
+          name="ngayhieuluc"
+          class="form-control"
+          [(ngModel)]="employee.effective_date"
+          formControlName="ngayhieuluc"
+          [ngClass]="{
+            'is-invalid': submitted && f['ngayhieuluc'].errors
+          }"
+        />
+        <div *ngIf="submitted && f['ngayhieuluc'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Ngày hết hiệu lực</label>
+        <input
+          type="date"
+          name="ngayhethieuluc"
+          class="form-control"
+          [(ngModel)]="employee.expiration_date"
+          formControlName="ngayhethieuluc"
+          [ngClass]="{
+            'is-invalid': submitted && f['ngayhethieuluc'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && f['ngayhethieuluc'].errors"
+          class="text-danger"
+        >
+          Trường này không được để trống !
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="">Loại hợp đồng</label>
+        <select
+          id="inputState"
+          name="loaihopdong"
+          class="form-control form-select"
+          [(ngModel)]="employee.type_of_contract"
+          formControlName="loaihopdong"
+          [ngClass]="{
+            'is-invalid': submitted && f['loaihopdong'].errors
+          }"
+        >
+          <option value="Dài hạn">Dài hạn</option>
+          <option value="Ngắn hạn">Ngắn hạn</option>
+        </select>
+        <div *ngIf="submitted && f['loaihopdong'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Văn phòng</label>
+        <input
+          type="text"
+          name="vanphong"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="employee.office"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Trụ sở</label>
+        <input
+          type="text"
+          name="truso"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="employee.headquarters"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Cấp bậc</label>
+        <select
+          id="inputState"
+          name="capbac"
+          class="form-control form-select"
+          [(ngModel)]="employee.rank"
+          formControlName="capbac"
+          [ngClass]="{
+            'is-invalid': submitted && f['capbac'].errors
+          }"
+        >
+          <option value="Giám đốc">Giám đốc</option>
+          <option value="Quản lí">Quản lí</option>
+          <option value="Trưởng phòng">Trưởng phòng</option>
+          <option value="Nhân viên">Nhân viên</option>
+        </select>
+        <div *ngIf="submitted && f['capbac'].errors" class="text-danger">
+          Trường này không được để trống !
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="">Lương tổng </label>
+        <input
+          type="text"
+          name="luong"
+          class="form-control"
+          [(ngModel)]="employee.wage"
+          formControlName="luong"
+          [ngClass]="{
+            'is-invalid': submitted && f['luong'].errors
+          }"
+        />
+        <div *ngIf="submitted && f['luong'].errors" class="text-danger">
+          <div *ngIf="f['luong'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['luong'].errors['pattern']">Định dạng không đúng !</div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Hình thức trả lương</label>
+        <select
+          id="inputState"
+          name="hinhthuctraluong"
+          class="form-control form-select"
+          [(ngModel)]="employee.payments"
+          formControlName="hinhthuctraluong"
+          [ngClass]="{
+            'is-invalid': submitted && f['hinhthuctraluong'].errors
+          }"
+        >
+          <option value="Thẻ ngân hàng">Thẻ ngân hàng</option>
+          <option value="Trực tiếp">Trực tiếp</option>
+        </select>
+        <div
+          *ngIf="submitted && f['hinhthuctraluong'].errors"
+          class="text-danger"
+        >
+          Trường này không được để trống !
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Đóng bảo hiểm</label>
+        <input
+          type="text"
+          name="phibaohiem"
+          class="form-control"
+          [(ngModel)]="employee.insurance_money"
+          formControlName="phibaohiem"
+          [ngClass]="{
+            'is-invalid': submitted && f['phibaohiem'].errors
+          }"
+        />
+        <div *ngIf="submitted && f['phibaohiem'].errors" class="text-danger">
+          <div *ngIf="f['phibaohiem'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['phibaohiem'].errors['pattern']">
+            Định dạng không đúng !
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Số bảo hiểm</label>
+        <input
+          type="text"
+          name="sbh"
+          class="form-control"
+          [(ngModel)]="employee.BHYT"
+          formControlName="sbh"
+          [ngClass]="{
+            'is-invalid': submitted && f['sbh'].errors
+          }"
+        />
+        <div *ngIf="submitted && f['sbh'].errors" class="text-danger">
+          <div *ngIf="f['sbh'].errors['required']">
+            Trường này không được để trống !
+          </div>
+          <div *ngIf="f['sbh'].errors['pattern']">Định dạng không đúng !</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" style="text-align: center; margin: 20px">
+      <button
+        class="btn btn-primary"
+        style="margin-right: 20px"
+        type="submit"
+        (click)="updateEmployee()"
+      >
+        <i class="fa-solid fa-check"></i>
+        Lưu
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="deleteEmployee(employee.id_employee)"
+      >
+        <i class="fa-solid fa-check"></i>
+        Làm mới
+      </button>
+    </div>
+  </form>
+</div>

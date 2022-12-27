@@ -1,0 +1,161 @@
+<div class="content">
+  <div class="main-list">
+    <div class="title-nv">
+      <b>Nhân viên</b>
+    </div>
+    <form action="" class="form-inline">
+      <div class="input-group">
+        <div class="form-outline">
+          <input
+            type="search"
+            id="form1"
+            name="search"
+            [(ngModel)]="searchText"
+            class="form-control"
+            placeholder="search..."
+            (keyup)="filter()"
+          />
+        </div>
+
+      </div>
+    </form>
+    <div class="main-dropdown">
+      <div class="dropdown" ngbDropdown>
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          ngbDropdownToggle
+        >
+          Chức vụ
+        </button>
+        <ul
+          class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton1"
+          ngbDropdownMenu
+        >
+          <li *ngFor="let item of ranks">
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              (click)="type_rank(item.rank)"
+              >{{ item.rank }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown" ngbDropdown>
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          ngbDropdownToggle
+        >
+          Tình trạng
+        </button>
+        <ul
+          class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton1"
+          ngbDropdownMenu
+        >
+          <li>
+            <a class="dropdown-item" ngbDropdownItem (click)="type_status(true)"
+              >Đang làm</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              (click)="type_status(false)"
+              >Đã nghỉ</a
+            >
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-primary" (click)="removeFilter($event)">
+        Tắt bộ lọc
+      </button>
+    </div>
+    <div class="btn-them">
+      <a
+        class="btn btn-primary"
+        [routerLink]="['/create-employee']"
+        role="button"
+        >Thêm</a
+      >
+    </div>
+  </div>
+  <table class="table table-success table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Mã nhân viên</th>
+        <th scope="col">Họ và tên</th>
+        <th scope="col">Email</th>
+        <th scope="col">phone</th>
+        <th scope="col">Chức vụ</th>
+        <th scope="col">Tình trạng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="click-block" *ngFor="let item of datas ">
+        <th scope="row">{{ item.id_employee }}</th>
+        <td>
+          <a [routerLink]="['/detail-employee', item.id_employee]">{{
+            item.ma_employee
+          }}</a>
+        </td>
+        <td>
+          <a [routerLink]="['/detail-employee', item.id_employee]">{{
+            item.full_name
+          }}</a>
+        </td>
+        <td>
+          <a [routerLink]="['/detail-employee', item.id_employee]">{{
+            item.email
+          }}</a>
+        </td>
+        <td>
+          <a [routerLink]="['/detail-employee', item.id_employee]">{{
+            item.phone
+          }}</a>
+        </td>
+        <td>
+          <a [routerLink]="['/detail-employee', item.id_employee]">{{
+            item.rank
+          }}</a>
+        </td>
+        <td *ngIf="item.status; else elseBlock">
+          <span class="badge rounded-pill bg-success"
+            ><a [routerLink]="['/detail-employee', item.id_employee]"
+              >Đang làm</a
+            ></span
+          >
+        </td>
+        <ng-template #elseBlock>
+          <td>
+            <span class="badge rounded-pill bg-danger"
+              ><a [routerLink]="['/detail-employee', item.id_employee]"
+                >Đã nghĩ</a
+              ></span
+            >
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+  <div style="display: flex; justify-content: center; align-items: center">
+    <ngb-pagination
+      #paginator
+      [collectionSize]="collectionSize"
+      [pageSize]="pageSize"
+      [(page)]="currentPage"
+      (pageChange)="handlePage()"
+    ></ngb-pagination>
+  </div>
+</div>

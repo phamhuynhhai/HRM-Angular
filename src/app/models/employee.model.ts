@@ -1,0 +1,30 @@
+export class Employee {
+  id_employee: number;
+  ma_employee: string;
+  full_name: string;
+  date_of_birth: string;
+  gender: number;
+  avatar: string;
+  email: string;
+  phone: string;
+  ethnic: string;
+  religion: string;
+  nationality: string;
+  cmnd: string;
+  issued_by: string;
+  date_range: string;
+  a_relative: string;
+  phone_a_relative: string;
+  contract_code: string;
+  contract_signing_date: string;
+  effective_date: string;
+  expiration_date: string;
+  type_of_contract: string;
+  office: string;
+  headquarters: string;
+  rank: string;
+  wage: number;
+  payments: string;
+  insurance_money: number;
+  BHYT: string;
+}

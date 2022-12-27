@@ -1,0 +1,55 @@
+<div style="margin: 20px">
+  <h1 class="mt-4">REGISTRATION</h1>
+  <hr />
+  <form
+    action=""
+    [formGroup]="userForm"
+    method="post"
+    class="form mb-4"
+    (submit)="onSubmit()"
+  >
+    <div class="form-group">
+      <label class="mr-3" for="">FULL NAME</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name"
+        placeholder="ex: Nguyen Van A"
+        [ngClass]="{
+          'is-invalid': submited && f['name'].errors
+        }"
+      />
+      <div class="mb-3 text-danger" *ngIf="submited && f['name'].errors">
+        Please do not leave it blank!
+      </div>
+      <label class="mr-3" style="margin-top: 20px" for="">EMAIL</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        placeholder="ex: nguyenvana@abc123.com"
+        [ngClass]="{
+          'is-invalid': submited && f['email'].errors
+        }"
+      />
+      <div class="mb-3 text-danger" *ngIf="submited && f['email'].errors">
+        Please check this email again!
+      </div>
+      <label class="mr-3" style="margin-top: 20px" for="">PASSWORD</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password min 8 characters long."
+        [ngClass]="{
+          'is-invalid': submited && f['password'].errors
+        }"
+      />
+      <div class="mb-3 text-danger" *ngIf="submited && f['password'].errors">
+        Please do not leave it blank!
+      </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>

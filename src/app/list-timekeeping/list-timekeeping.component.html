@@ -1,0 +1,185 @@
+<div class="content">
+  <div class="main-list">
+    <div class="title-nv">
+      <b
+        >Danh sách chấm công
+        <i style="font-size: 30px" class="fa-solid fa-fingerprint"></i
+      ></b>
+    </div>
+    <form action="" class="form-inline">
+      <div class="input-group">
+        <div class="form-outline">
+          <input
+            type="search"
+            id="form1"
+            name="search"
+            [(ngModel)]="searchText"
+            class="form-control"
+            placeholder="search..."
+            (keyup)="filter()"
+          />
+        </div>
+      </div>
+    </form>
+    <div class="main-dropdown">
+      <div class="dropdown" ngbDropdown>
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          ngbDropdownToggle
+        >
+          Số giờ làm
+        </button>
+        <ul
+          class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton1"
+          ngbDropdownMenu
+        >
+          <li>
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              (click)="type_timeWork(150, 200)"
+              >150h - 200h</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              (click)="type_timeWork(200, 230)"
+              >200h - 230h</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              (click)="type_timeWork(230, 500)"
+              >>230h</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown" ngbDropdown>
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          ngbDropdownToggle
+        >
+          Tháng
+        </button>
+        <ul
+          class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton1"
+          ngbDropdownMenu
+        >
+          <li *ngFor="let item of month">
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              (click)="type_month(item)"
+              >{{ item }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown" ngbDropdown>
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          ngbDropdownToggle
+        >
+          Năm
+        </button>
+        <ul
+          class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton1"
+          ngbDropdownMenu
+        >
+          <li *ngFor="let item of year">
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              (click)="type_year(item.year)"
+              >{{ item.year }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-primary" (click)="removeFilter($event)">Tắt bộ lọc</button>
+    </div>
+  </div>
+
+  <table class="table table-success table-striped table-hover">
+    <thead>
+      <tr class="click-block-title">
+        <th scope="col">Mã nhân viên</th>
+        <th scope="col">Tên Nhân viên</th>
+        <th scope="col">Tháng</th>
+        <th scope="col">Năm</th>
+        <th scope="col">Số giờ làm/tháng</th>
+        <th scope="col">Chức vụ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="click-block-qlcc"
+        *ngFor="let item of datas "
+      >
+        <td>
+          <a>{{ item.ma_employee }}</a>
+        </td>
+        <td>
+          <a>{{ item.full_name }}</a>
+        </td>
+        <td>
+          <a>{{ item.month }}</a>
+        </td>
+        <td>
+          <a>{{ item.year }}</a>
+        </td>
+        <td>
+          <a>{{ item.total_time }}</a>
+        </td>
+        <td>
+          <a>{{ item.rank }}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="display: flex; justify-content: center; align-items: center">
+    <ngb-pagination
+      #paginator
+      [collectionSize]="collectionSize"
+      [pageSize]="pageSize"
+      [(page)]="currentPage"
+      (pageChange)="handlePage()"
+    ></ngb-pagination>
+  </div>
+
+  <form style="margin-bottom: 15px">
+    <input
+      type="file"
+      name="file"
+      accept=".xlsx"
+      (change)="ReadExcel($event)"
+    /><br /><br />
+    <input
+      class="btn btn-warning"
+      type="submit"
+      value="Import file excel"
+      name="import_csv"
+      (click)="inputExcel()"
+    />
+  </form>
+</div>
