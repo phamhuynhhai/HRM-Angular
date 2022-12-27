@@ -36,7 +36,7 @@ export class LayoutComponent {
   }
   changeActive(){
     let qlnv = document.getElementById('qlnv') as HTMLElement;
-    let qlcc = document.getElementById('qlnv') as HTMLElement;
+    let qlcc = document.getElementById('qlcc') as HTMLElement;
     console.log(window.location.href);
     if (window.location.href.includes('list-timekeeping')) {
       qlcc.classList.remove('link-dark');
