@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SigninComponent } from './signin/signin.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { RegistrationComponent } from './registration/registration.component';
     SigninComponent,
     LogoutComponent,
     RegistrationComponent,
+    ForgotComponent,
+    ResetPasswordComponent
   ],
   imports: [
     Ng2SearchPipeModule,

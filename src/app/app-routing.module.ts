@@ -9,11 +9,15 @@ import { LogoutComponent } from './logout/logout.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { RoleGuardServiceGuard } from './role-guard-service.guard';
 import { SigninComponent } from './signin/signin.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'registration', component: RegistrationComponent },
+  { path: 'forgot', component: ForgotComponent},
+  { path: 'reset-password', component: ResetPasswordComponent},
   {
     path: '',
     component: LayoutComponent,

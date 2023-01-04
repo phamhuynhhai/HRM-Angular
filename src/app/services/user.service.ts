@@ -65,4 +65,20 @@ export class UserService {
     let options = { headers: headers };
     return this.http.post<any>('http://192.168.1.23:8000/api/test/',null, options);
   }
+  forgot(data : any): Observable<any>{
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem("token") });
+    let options = { headers: headers };
+    return this.http.post<any>('http://127.0.0.1:8000/api/forgot/',data, options);
+  }
+  reset_password(data : any, emailreset :any): Observable<any>{
+    let formData = {
+      data: data,
+      emailreset: emailreset
+    }
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem("token") });
+    let options = { headers: headers };
+    return this.http.post<any>('http://127.0.0.1:8000/api/reset_password/', formData, options);
+  }
 }
