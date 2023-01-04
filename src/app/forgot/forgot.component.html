@@ -1,0 +1,31 @@
+<div class="card text-center" style="width: 300px; margin: 80px auto">
+  <div class="card-header h5 text-white bg-primary">Password Reset</div>
+  <div class="card-body px-5">
+    <p class="card-text py-2">
+      Enter your email address and we'll send you an email with instructions to
+      reset your password.
+    </p>
+    <form [formGroup]="forgotForm" (ngSubmit)="forgotData()">
+      <input
+        type="email"
+        id="typeEmail"
+        name="email"
+        class="form-control my-3"
+        formControlName="email"
+        placeholder="email input"
+      />
+      <div *ngIf="submitted && f['email'].errors" class="text-danger">
+        <div *ngIf="f['email'].errors['required']">
+          Trường này không được để trống !
+        </div>
+        <div *ngIf="f['email'].errors['email']">Định dạng không đúng !</div>
+      </div>
+
+      <button class="btn btn-primary w-100">Reset password</button>
+    </form>
+    <div class="d-flex justify-content-between mt-4">
+      <a class="" [routerLink]="['/signin']">Login</a>
+      <a class="" [routerLink]="['/registration']">Register</a>
+    </div>
+  </div>
+</div>
